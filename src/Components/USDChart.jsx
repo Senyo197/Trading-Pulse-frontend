@@ -24,7 +24,7 @@ const USDChart = () => {
       const fetchedData = {};
 
       for (const impact of impactLevels) {
-        const response = await axios.get("https://senyo197.pythonanywhere.com/", {
+        const response = await axios.get("http://senyo197.pythonanywhere.com/", {
           params: {
             currency: "USD",
             impact_level: impact,
