@@ -24,7 +24,7 @@ const CNYChart = () => {
             const fetchedData = {};
 
             for (const impact of impactLevels) {
-                const response = await axios.get("https://senyo197.pythonanywhere.com/", {
+                const response = await axios.get("http://54.152.172.214/", {
                     params: {
                         currency: "CNY",
                         impact_level: impact,
