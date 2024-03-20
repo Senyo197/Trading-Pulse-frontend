@@ -24,7 +24,7 @@ const JPYChart = () => {
             const fetchedData = {};
 
             for (const impact of impactLevels) {
-                const response = await axios.get("http://54.152.172.214/", {
+                const response = await axios.get("https://54.152.172.214/", {
                     params: {
                         currency: "JPY",
                         impact_level: impact,
