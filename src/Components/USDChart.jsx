@@ -24,7 +24,7 @@ const USDChart = () => {
       const fetchedData = {};
 
       for (const impact of impactLevels) {
-        const response = await axios.get("https://54.152.172.214:8000/", {
+        const response = await axios.get("https://trading-pulse-backend-dev-hmex.2.sg-1.fl0.io", {
           params: {
             currency: "USD",
             impact_level: impact,
