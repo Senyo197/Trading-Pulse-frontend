@@ -45,27 +45,19 @@ const USDChart = () => {
   };
 
   const countOutcomes = (eventsData) => {
-    console.log("eventsData type:", typeof eventsData);
-    console.log("eventsData:", eventsData);
-
     let positiveCount = 0;
     let neutralCount = 0;
     let negativeCount = 0;
 
-    // Ensure eventsData is an array before iterating
-    if (Array.isArray(eventsData)) {
-      eventsData.forEach(data => {
-        if (data.outcome === 'positive') {
-          positiveCount++;
-        } else if (data.outcome === 'neutral') {
-          neutralCount++;
-        } else if (data.outcome === 'negative') {
-          negativeCount++;
-        }
-      });
-    } else {
-      console.error("eventsData is not an array:", eventsData);
-    }
+    eventsData.forEach(data => {
+      if (data.outcome === 'positive') {
+        positiveCount++;
+      } else if (data.outcome === 'neutral') {
+        neutralCount++;
+      } else if (data.outcome === 'negative') {
+        negativeCount++;
+      }
+    });
 
     return { positiveCount, neutralCount, negativeCount };
   };
