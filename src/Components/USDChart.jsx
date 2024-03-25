@@ -45,19 +45,22 @@ const USDChart = () => {
   };
 
   const countOutcomes = (eventsData) => {
+
     let positiveCount = 0;
     let neutralCount = 0;
     let negativeCount = 0;
 
-    eventsData.forEach(data => {
-      if (data.outcome === 'positive') {
-        positiveCount++;
-      } else if (data.outcome === 'neutral') {
-        neutralCount++;
-      } else if (data.outcome === 'negative') {
-        negativeCount++;
-      }
-    });
+    if (Array.isArray(eventsData)) {
+      eventsData.forEach(data => {
+        if (data.outcome === 'positive') {
+          positiveCount++;
+        } else if (data.outcome === 'neutral') {
+          neutralCount++;
+        } else if (data.outcome === 'negative') {
+          negativeCount++;
+        }
+      });
+    }
 
     return { positiveCount, neutralCount, negativeCount };
   };
