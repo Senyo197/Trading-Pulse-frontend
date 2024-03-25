@@ -8,7 +8,6 @@ import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 
-
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
@@ -45,22 +44,19 @@ const USDChart = () => {
   };
 
   const countOutcomes = (eventsData) => {
-
     let positiveCount = 0;
     let neutralCount = 0;
     let negativeCount = 0;
 
-    if (Array.isArray(eventsData)) {
-      eventsData.forEach(data => {
-        if (data.outcome === 'positive') {
-          positiveCount++;
-        } else if (data.outcome === 'neutral') {
-          neutralCount++;
-        } else if (data.outcome === 'negative') {
-          negativeCount++;
-        }
-      });
-    }
+    eventsData.forEach(data => {
+      if (data.outcome === 'positive') {
+        positiveCount++;
+      } else if (data.outcome === 'neutral') {
+        neutralCount++;
+      } else if (data.outcome === 'negative') {
+        negativeCount++;
+      }
+    });
 
     return { positiveCount, neutralCount, negativeCount };
   };
