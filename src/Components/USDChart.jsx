@@ -8,6 +8,7 @@ import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 
+
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
@@ -61,7 +62,6 @@ const USDChart = () => {
     return { positiveCount, neutralCount, negativeCount };
   };
 
-  // Prepare data for the bar chart
   const chartData = {
     labels: ['Low Events', 'Moderate Events', 'High Events'],
     datasets: [
