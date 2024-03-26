@@ -7,7 +7,7 @@ export default function Navbar() {
   const [activeChart, setActiveChart] = useState("");
 
   const handleLogoClick = () => {
-    setActiveChart(""); // Clear the active icon when the logo is clicked
+    setActiveChart("");
   };
 
   const handleSetActive = (chart) => {

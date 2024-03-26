@@ -62,7 +62,6 @@ const CHFChart = () => {
         return { positiveCount, neutralCount, negativeCount };
     };
 
-    // Prepare data for the bar chart
     const chartData = {
         labels: ['Low Events', 'Moderate Events', 'High Events'],
         datasets: [
