@@ -12,6 +12,7 @@ import EURChart from "./Components/EURChart";
 import GBPChart from "./Components/GBPChart";
 import JPYChart from "./Components/JPYChart";
 import NZDChart from "./Components/NZDChart";
+import Footer from "./Components/Footer";
 
 export default function App() {
   return (
@@ -32,6 +33,7 @@ export default function App() {
           </Routes>
         </div>
       </Layout>
+      <Footer />
     </Router>
   );
 }

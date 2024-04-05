@@ -1,98 +1,86 @@
-import React, { useState } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import logo from "@Images/eagle-logo.png";
 import { Link } from "react-router-dom";
+import { Menu as MenuIcon, Close as CloseIcon } from "@mui/icons-material";
 
 export default function Navbar() {
+  const [isNavbarVisible, setIsNavbarVisible] = useState(false);
+  const navbarRef = useRef(null);
 
-  const [activeChart, setActiveChart] = useState("");
-
-  const handleLogoClick = () => {
-    setActiveChart("");
+  const toggleNavbar = () => {
+    setIsNavbarVisible(!isNavbarVisible);
   };
 
-  const handleSetActive = (chart) => {
-    setActiveChart(chart);
+  const closeNavbar = () => {
+    setIsNavbarVisible(false);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (navbarRef.current && !navbarRef.current.contains(event.target)) {
+        closeNavbar();
+      }
+    };
+
+    if (isNavbarVisible) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isNavbarVisible]);
 
   return (
-    <nav className="md:hidden h-16 bg-black sticky left-0 w-screen text-white flex">
-      <div className="flex justify-between items-center mr-4">
+    <nav className="md:hidden h-20 bg-black sticky left-0 w-screen text-white flex justify-between items-center">
+      <div className="flex items-center">
         <img
           src={logo}
           alt="Logo"
           className="ml-4 my-2 h-12 w-12 filter brightness-0 invert"
         />
       </div>
-      <div className="flex flew-col flex-wrap">
-        <div className="ml-4">
-          <Link
-            to="/"
-            className={`sidebar-item rounded-sm ${activeChart === "usd" ? "active" : ""}`}
-            onClick={() => handleSetActive("usd")}
-          >
-            USD
-          </Link>
-          <Link
-            to="/aud"
-            className={`sidebar-item rounded-sm ${activeChart === "aud" ? "active" : ""}`}
-            onClick={() => handleSetActive("aud")}
-          >
-            AUD
-          </Link>
-          <Link
-            to="/cad"
-            className={`sidebar-item rounded-sm ${activeChart === "cad" ? "active" : ""}`}
-            onClick={() => handleSetActive("cad")}
-          >
-            CAD
-          </Link>
-          <Link
-            to="/chf"
-            className={`sidebar-item rounded-sm ${activeChart === "chf" ? "active" : ""}`}
-            onClick={() => handleSetActive("chf")}
-          >
-            CHF
-          </Link>
-          <Link
-            to="/cny"
-            className={`sidebar-item rounded-sm ${activeChart === "cny" ? "active" : ""}`}
-            onClick={() => handleSetActive("cny")}
-          >
-            CNY
-          </Link>
+      <button
+        onClick={toggleNavbar}
+        className="px-6 text-white"
+        aria-label="Toggle Navbar"
+      >
+        {isNavbarVisible ? <CloseIcon className="text-2xl" /> : <MenuIcon className="text-xl" />}
+      </button>
+
+      {isNavbarVisible && (
+        <div ref={navbarRef} className="fixed top-20 left-0 px-4 bg-black h-88 w-full flex flex-col text-white items-center rounded-b-3xl">
+          <div>
+            <Link to="/" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              USD Chart
+            </Link>
+            <Link to="/aud" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              AUD Chart
+            </Link>
+            <Link to="/cad" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              CAD Chart
+            </Link>
+            <Link to="/chf" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              CHF Chart
+            </Link>
+            <Link to="/cny" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              CNY Chart
+            </Link>
+            <Link to="/eur" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              EUR Chart
+            </Link>
+            <Link to="/gbp" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              GBP Chart
+            </Link>
+            <Link to="/jpy" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              JPY Chart
+            </Link>
+            <Link to="/nzd" className="mb-4 flex text-xl" onClick={closeNavbar}>
+              NZD Chart
+            </Link>
+          </div>
         </div>
-        <div className="ml-4">
-          <Link
-            to="/eur"
-            className={`sidebar-item rounded-sm ${activeChart === "eur" ? "active" : ""}`}
-            onClick={() => handleSetActive("eur")}
-          >
-            EUR
-          </Link>
-          <Link
-            to="/gbp"
-            className={`sidebar-item rounded-sm ${activeChart === "gbp" ? "active" : ""}`}
-            onClick={() => handleSetActive("gbp")}
-          >
-            GBP
-          </Link>
-          <Link
-            to="/jpy"
-            className={`sidebar-item rounded-sm ${activeChart === "jpy" ? "active" : ""}`}
-            onClick={() => handleSetActive("jpy")}
-          >
-            JPY
-          </Link>
-          <Link
-            to="/nzd"
-            className={`sidebar-item rounded-sm ${activeChart === "nzd" ? "active" : ""}`}
-            onClick={() => handleSetActive("nzd")}
-          >
-            NZD
-          </Link>
-        </div>
-      </div>
+      )}
     </nav>
   );
 }
