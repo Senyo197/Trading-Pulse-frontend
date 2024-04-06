@@ -13,6 +13,8 @@ import GBPChart from "./Components/GBPChart";
 import JPYChart from "./Components/JPYChart";
 import NZDChart from "./Components/NZDChart";
 import Footer from "./Components/Footer";
+import About from "./Components/About";
+import Disclaimer from "./Components/Disclaimer";
 
 export default function App() {
   return (
@@ -20,6 +22,8 @@ export default function App() {
       <Layout>
         <div className="flex">
           <Routes>
+            <Route exact path="/about" element={<About />} />
+            <Route exact path="/disclaimer" element={<Disclaimer />} />
             <Route exact path="/aud" element={<AUDChart />} />
             <Route exact path="/" element={<USDChart />} />
             <Route exact path="/cad" element={<CADChart />} />
