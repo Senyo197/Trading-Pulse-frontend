@@ -13,14 +13,14 @@ const Footer = () => {
             <div>
                 <Link
                     to="/about"
-                    className={`text-white mr-2 ${activeChart === "about" ? "active" : ""}`}
+                    className={`sidebar-item mr-2 ${activeChart === "about" ? "active" : ""}`}
                     onClick={() => handleSetActive("about")}
                 >
                     About
                 </Link>
                 <Link
                     to="/disclaimer"
-                    className={`text-white ${activeChart === "disclaimer" ? "active" : ""}`}
+                    className={`sidebar-item ${activeChart === "disclaimer" ? "active" : ""}`}
                     onClick={() => handleSetActive("disclaimer")}
                 >
                     Disclaimer
