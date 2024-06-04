@@ -27,7 +27,7 @@ const Footer = () => {
                 </Link>
             </div>
             <div className="mt-4">
-                &copy; {new Date().getFullYear()} Your Company Name. All rights reserved.
+                &copy; {new Date().getFullYear()} Trading Pulse. All rights reserved.
             </div>
         </footer>
     );
