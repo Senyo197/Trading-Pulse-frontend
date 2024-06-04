@@ -8,6 +8,7 @@ import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 import { debounce } from "lodash";
+import { getCachedData, setCachedData } from './indexedDB'; // Import the IndexedDB utility
 
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
@@ -21,23 +22,33 @@ const USDChart = () => {
   const fetchData = async (startDate = "", endDate = "") => {
     try {
       const impactLevels = ['L', 'M', 'H'];
-      const requests = impactLevels.map(impact =>
-        axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
-          params: {
-            currency: "USD",
-            impact_level: impact,
-            start_date: startDate,
-            end_date: endDate
-          },
-        })
-      );
+      const fetchPromises = impactLevels.map(async (impact) => {
+        const cacheKey = `USD_${impact}_${startDate}_${endDate}`;
+        const cachedResponse = await getCachedData(cacheKey);
 
-      const responses = await Promise.all(requests);
-      const fetchedData = {
-        'L': responses[0].data,
-        'M': responses[1].data,
-        'H': responses[2].data,
-      };
+        if (cachedResponse) {
+          return { impact, data: cachedResponse.data };
+        } else {
+          const response = await axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
+            params: {
+              currency: "USD",
+              impact_level: impact,
+              start_date: startDate,
+              end_date: endDate
+            },
+          });
+
+          await setCachedData(cacheKey, response.data);
+          return { impact, data: response.data };
+        }
+      });
+
+      const results = await Promise.all(fetchPromises);
+
+      const fetchedData = results.reduce((acc, result) => {
+        acc[result.impact] = result.data;
+        return acc;
+      }, {});
 
       setLowEvents(fetchedData['L']);
       setModerateEvents(fetchedData['M']);
@@ -112,7 +123,7 @@ const USDChart = () => {
 
   return (
     <div>
-      <h1 className=" text-xl mb-4">USD Economic Events Since 2007</h1>
+      <h1 className="text-xl mb-4">USD Economic Events Since 2007</h1>
       <ToggleCustomDate handleSearch={handleSearch} />
       <ToggleLastWeek handleSearch={handleSearch} />
       <ToggleThisMonth handleSearch={handleSearch} />
