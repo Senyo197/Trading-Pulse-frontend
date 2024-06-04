@@ -7,7 +7,7 @@ import ToggleThisMonth from "./ToggleThisMonth";
 import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
-
+import { debounce } from "lodash";
 
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
@@ -21,20 +21,23 @@ const USDChart = () => {
   const fetchData = async (startDate = "", endDate = "") => {
     try {
       const impactLevels = ['L', 'M', 'H'];
-      const fetchedData = {};
-
-      for (const impact of impactLevels) {
-        const response = await axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
+      const requests = impactLevels.map(impact =>
+        axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
           params: {
             currency: "USD",
             impact_level: impact,
             start_date: startDate,
             end_date: endDate
           },
-        });
+        })
+      );
 
-        fetchedData[impact] = response.data;
-      }
+      const responses = await Promise.all(requests);
+      const fetchedData = {
+        'L': responses[0].data,
+        'M': responses[1].data,
+        'H': responses[2].data,
+      };
 
       setLowEvents(fetchedData['L']);
       setModerateEvents(fetchedData['M']);
@@ -43,6 +46,8 @@ const USDChart = () => {
       console.error("Error fetching data:", error);
     }
   };
+
+  const debouncedFetchData = debounce(fetchData, 300);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
@@ -102,7 +107,7 @@ const USDChart = () => {
   };
 
   const handleSearch = (startDate, endDate) => {
-    fetchData(startDate, endDate);
+    debouncedFetchData(startDate, endDate);
   };
 
   return (
