@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Components/index.css";
 import NotFound from "./Components/NotFound";
 import Layout from "./Components/Layout";
@@ -15,22 +15,8 @@ import NZDChart from "./Components/NZDChart";
 import Footer from "./Components/Footer";
 import About from "./Components/About";
 import Disclaimer from "./Components/Disclaimer";
-import Spinner from "./Spinner"; // Import Spinner component
 
 export default function App() {
-  const [loading, setLoading] = useState(true); // State to manage loading state
-
-  // Simulate loading delay
-  setTimeout(() => {
-    setLoading(false);
-  }, 2000);
-
-  // Render spinner if loading
-  if (loading) {
-    return <Spinner />;
-  }
-
-  // Render the app content once loading is done
   return (
     <Router>
       <Layout>
