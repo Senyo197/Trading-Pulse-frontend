@@ -15,14 +15,14 @@ const GBPChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
-  const [loading, setLoading] = useState(true); // State to manage loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async (startDate = "", endDate = "") => {
-    setLoading(true); // Set loading to true when fetching data
+    setLoading(true);
     try {
       const impactLevels = ['L', 'M', 'H'];
       const fetchPromises = impactLevels.map(async (impact) => {
@@ -59,7 +59,7 @@ const GBPChart = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false); // Set loading to false when data fetching is complete
+      setLoading(false);
     }
   };
 

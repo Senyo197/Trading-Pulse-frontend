@@ -59,7 +59,7 @@ const AUDChart = () => {
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
-      setLoading(false); // Set loading to false when data fetching is complete
+      setLoading(false);
     }
   };
 
