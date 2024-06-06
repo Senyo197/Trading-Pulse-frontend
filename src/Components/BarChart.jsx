@@ -77,14 +77,14 @@ const BarChart = ({ chartData }) => {
   const containerStyle = {
     width: "100%",
     maxWidth: "900px",
-    margin: "20px auto", // Add margin here
-    textAlign: "center"  // Center-align text
+    margin: "20px auto",
+    textAlign: "center"
   };
 
   const messageStyle = {
     fontSize: "18px",
-    color: "red", // You can change the color as needed
-    margin: "20px 0" // Add margins around the message
+    color: "#FF0000",
+    margin: "20px 0"
   };
 
   return (
