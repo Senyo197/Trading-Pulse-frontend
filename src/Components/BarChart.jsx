@@ -71,7 +71,6 @@ const BarChart = ({ chartData }) => {
     };
   }, [screenWidth, chartData]);
 
-  // Check if there is any data to display
   const hasData = chartData.datasets.some(dataset => dataset.data.some(data => data > 0));
 
   return (
@@ -79,7 +78,7 @@ const BarChart = ({ chartData }) => {
       {hasData ? (
         <canvas ref={chartRef} />
       ) : (
-        <p>No data available</p>
+        <p className="mt-8 ml-12 font-bold">No data available</p>
       )}
     </div>
   );
