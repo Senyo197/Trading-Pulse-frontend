@@ -18,7 +18,7 @@ const ToggleThisYear = ({ handleSearch }) => {
 
     return (
         <div className="mb-2">
-            <button onClick={handleButtonClick} className="bg-blue-500 text-white py-2 px-4 rounded">
+            <button onClick={handleButtonClick} className="bg-black text-white text-sm px-2 py-1 rounded-md mt-4 ml-2">
                 This Year
             </button>
         </div>

@@ -128,13 +128,16 @@ const GBPChart = () => {
 
   return (
     <div>
-      <h1 className="text-xl mb-4">GBP Economic Events Since 2007</h1>
+      <h1 className="text-xl mb-4 font-bold">GBP Economic Events Since 2007</h1>
       <ToggleCustomDate handleSearch={handleSearch} />
-      <ToggleLastWeek handleSearch={handleSearch} />
-      <ToggleThisMonth handleSearch={handleSearch} />
-      <ToggleLastMonth handleSearch={handleSearch} />
-      <ToggleThisYear handleSearch={handleSearch} />
-      <ToggleLastYear handleSearch={handleSearch} />
+      <div className="flex">
+
+        <ToggleLastWeek handleSearch={handleSearch} />
+        <ToggleThisMonth handleSearch={handleSearch} />
+        <ToggleLastMonth handleSearch={handleSearch} />
+        <ToggleThisYear handleSearch={handleSearch} />
+        <ToggleLastYear handleSearch={handleSearch} />
+      </div>
       {loading ? <Spinner /> : <BarChart chartData={chartData} />}
     </div>
   );
