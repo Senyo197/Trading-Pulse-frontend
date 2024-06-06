@@ -71,14 +71,28 @@ const BarChart = ({ chartData }) => {
     };
   }, [screenWidth, chartData]);
 
+  // Check if there is any data to display
   const hasData = chartData.datasets.some(dataset => dataset.data.some(data => data > 0));
 
+  const containerStyle = {
+    width: "100%",
+    maxWidth: "900px",
+    margin: "20px auto", // Add margin here
+    textAlign: "center"  // Center-align text
+  };
+
+  const messageStyle = {
+    fontSize: "18px",
+    color: "red", // You can change the color as needed
+    margin: "20px 0" // Add margins around the message
+  };
+
   return (
-    <div style={{ width: "100%", maxWidth: "900px", margin: "0 auto" }}>
+    <div style={containerStyle}>
       {hasData ? (
         <canvas ref={chartRef} />
       ) : (
-        <p className="mt-8 ml-12 font-bold">No data available</p>
+        <p style={messageStyle}>No data available</p>
       )}
     </div>
   );
