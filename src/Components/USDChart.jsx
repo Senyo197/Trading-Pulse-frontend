@@ -8,18 +8,21 @@ import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 import { debounce } from "lodash";
-import { getCachedData, setCachedData } from './indexedDB'; // Import the IndexedDB utility
+import { getCachedData, setCachedData } from './indexedDB';
+import Spinner from "./Spinner";
 
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
+  const [loading, setLoading] = useState(true); // State to manage loading state
 
   useEffect(() => {
     fetchData();
   }, []);
 
   const fetchData = async (startDate = "", endDate = "") => {
+    setLoading(true); // Set loading to true when fetching data
     try {
       const impactLevels = ['L', 'M', 'H'];
       const fetchPromises = impactLevels.map(async (impact) => {
@@ -55,6 +58,8 @@ const USDChart = () => {
       setHighEvents(fetchedData['H']);
     } catch (error) {
       console.error("Error fetching data:", error);
+    } finally {
+      setLoading(false); // Set loading to false when data fetching is complete
     }
   };
 
@@ -130,7 +135,7 @@ const USDChart = () => {
       <ToggleLastMonth handleSearch={handleSearch} />
       <ToggleThisYear handleSearch={handleSearch} />
       <ToggleLastYear handleSearch={handleSearch} />
-      <BarChart chartData={chartData} />
+      {loading ? <Spinner /> : <BarChart chartData={chartData} />}
     </div>
   );
 };

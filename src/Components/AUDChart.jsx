@@ -8,7 +8,7 @@ import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 import { debounce } from "lodash";
-import { getCachedData, setCachedData } from './indexedDB'; // Import the IndexedDB utility
+import { getCachedData, setCachedData } from './indexedDB';
 
 const AUDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
