@@ -32,7 +32,7 @@ const EURChart = () => {
         if (cachedResponse) {
           return { impact, data: cachedResponse.data };
         } else {
-          const response = await axios.get("https://senyo197.pythonanywhere.com/api/economic-events/?currency=EUR", {
+          const response = await axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
             params: {
               currency: "EUR",
               impact_level: impact,
