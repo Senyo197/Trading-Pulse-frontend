@@ -32,9 +32,8 @@ const USDChart = () => {
         if (cachedResponse) {
           return { impact, data: cachedResponse.data };
         } else {
-          const response = await axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
+          const response = await axios.get("http://senyo197.pythonanywhere.com/api/economic-events/?currency=USD", {
             params: {
-              currency: "USD",
               impact_level: impact,
               start_date: startDate,
               end_date: endDate
