@@ -21,7 +21,7 @@ const LightTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const ToggleButtons = ({ handleSearch }) => {
+const ToggleButtons = () => {
   const [activeButton, setActiveButton] = useState("");
 
   const handleSetActive = (buttonName) => {
@@ -40,10 +40,9 @@ const ToggleButtons = ({ handleSearch }) => {
           className={buttonStyles("lastWeek")}
           onClick={() => {
             handleSetActive("lastWeek");
-            handleSearch();
           }}
         >
-          <ToggleLastWeek handleSearch={handleSearch} />
+          <ToggleLastWeek />
         </div>
       </LightTooltip>
       <LightTooltip title="This Month" arrow placement="bottom">
@@ -51,10 +50,9 @@ const ToggleButtons = ({ handleSearch }) => {
           className={buttonStyles("thisMonth")}
           onClick={() => {
             handleSetActive("thisMonth");
-            handleSearch();
           }}
         >
-          <ToggleThisMonth handleSearch={handleSearch} />
+          <ToggleThisMonth />
         </div>
       </LightTooltip>
       <LightTooltip title="Last Month" arrow placement="bottom">
@@ -62,10 +60,9 @@ const ToggleButtons = ({ handleSearch }) => {
           className={buttonStyles("lastMonth")}
           onClick={() => {
             handleSetActive("lastMonth");
-            handleSearch();
           }}
         >
-          <ToggleLastMonth handleSearch={handleSearch} />
+          <ToggleLastMonth />
         </div>
       </LightTooltip>
       <LightTooltip title="This Year" arrow placement="bottom">
@@ -73,10 +70,9 @@ const ToggleButtons = ({ handleSearch }) => {
           className={buttonStyles("thisYear")}
           onClick={() => {
             handleSetActive("thisYear");
-            handleSearch();
           }}
         >
-          <ToggleThisYear handleSearch={handleSearch} />
+          <ToggleThisYear />
         </div>
       </LightTooltip>
       <LightTooltip title="Last Year" arrow placement="bottom">
@@ -84,10 +80,9 @@ const ToggleButtons = ({ handleSearch }) => {
           className={buttonStyles("lastYear")}
           onClick={() => {
             handleSetActive("lastYear");
-            handleSearch();
           }}
         >
-          <ToggleLastYear handleSearch={handleSearch} />
+          <ToggleLastYear />
         </div>
       </LightTooltip>
     </div>
