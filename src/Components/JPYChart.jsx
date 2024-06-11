@@ -2,11 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
-import ToggleLastWeek from "./ToggleLastWeek";
-import ToggleThisMonth from "./ToggleThisMonth";
-import ToggleLastMonth from "./ToggleLastMonth";
-import ToggleThisYear from "./ToggleThisYear";
-import ToggleLastYear from "./ToggleLastYear";
+import ToggleButtons from "./ToggleButtons"; // Import the new component
 import { debounce } from "lodash";
 import { getCachedData, setCachedData } from './indexedDB';
 import Spinner from "./Spinner";
@@ -130,14 +126,7 @@ const JPYChart = () => {
     <div>
       <h1 className="text-xl mb-12 font-bold">JPY Economic Events Since 2007</h1>
       <ToggleCustomDate handleSearch={handleSearch} />
-      <div className="flex mb-20">
-
-        <ToggleLastWeek handleSearch={handleSearch} />
-        <ToggleThisMonth handleSearch={handleSearch} />
-        <ToggleLastMonth handleSearch={handleSearch} />
-        <ToggleThisYear handleSearch={handleSearch} />
-        <ToggleLastYear handleSearch={handleSearch} />
-      </div>
+      <ToggleButtons handleSearch={handleSearch} />
       {loading ? <Spinner /> : <BarChart chartData={chartData} />}
     </div>
   );
