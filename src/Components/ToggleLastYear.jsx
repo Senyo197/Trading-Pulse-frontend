@@ -18,7 +18,7 @@ const ToggleLastYear = ({ handleSearch }) => {
 
     return (
         <div className="mb-2">
-            <button onClick={handleButtonClick} className="bg-black text-white text-sm px-2 py-1 rounded-md mt-4 ml-2">
+            <button onClick={handleButtonClick} className="text-sm mt-4 ml-2">
                 Last Year
             </button>
         </div>

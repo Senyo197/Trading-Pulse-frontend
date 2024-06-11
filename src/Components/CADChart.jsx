@@ -128,9 +128,9 @@ const CADChart = () => {
 
   return (
     <div>
-      <h1 className="text-xl mb-4 font-bold">CAD Economic Events Since 2007</h1>
+      <h1 className="text-xl mb-12 font-bold">CAD Economic Events Since 2007</h1>
       <ToggleCustomDate handleSearch={handleSearch} />
-      <div className="flex">
+      <div className="flex mb-20">
 
         <ToggleLastWeek handleSearch={handleSearch} />
         <ToggleThisMonth handleSearch={handleSearch} />

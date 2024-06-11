@@ -17,28 +17,31 @@ const ToggleCustomDate = ({ handleSearch }) => {
   };
 
   return (
-    <div className={"flex items-center mb-4"}>
-      <label className="mr-4 text-sm text-black">
-        <span className="mr-2 text-sm">Start Date:</span>
+    <div className="flex items-center mb-4 space-x-4">
+      <label className="flex flex-col text-sm text-gray-700">
+        <span className="mb-1 font-medium">Start Date</span>
         <input
           type="date"
           id="startDate"
           value={startDate}
           onChange={handleStartDateChange}
-          className="border rounded px-2 py-1"
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
-      <label className="mr-4 text-sm text-black">
-        <span className="mr-2 text-sm">End Date:</span>
+      <label className="flex flex-col text-sm text-gray-700">
+        <span className="mb-1 font-medium">End Date</span>
         <input
           type="date"
           id="endDate"
           value={endDate}
           onChange={handleEndDateChange}
-          className="border rounded solid px-2 py-1"
+          className="border border-gray-300 rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
         />
       </label>
-      <button onClick={handleSearchClick} className="bg-black text-white px-2 rounded">
+      <button
+        onClick={handleSearchClick}
+        className="bg-black text-white font-medium px-4 py-2 rounded-md"
+      >
         Search
       </button>
     </div>
