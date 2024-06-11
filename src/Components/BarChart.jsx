@@ -6,85 +6,79 @@ Chart.register(CategoryScale);
 
 const BarChart = ({ chartData }) => {
   const chartRef = useRef(null);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
+  const [chartInstance, setChartInstance] = useState(null);
 
   useEffect(() => {
-    const handleResize = () => {
-      setScreenWidth(window.innerWidth);
-    };
-
-    window.addEventListener("resize", handleResize);
-
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
-
-  useEffect(() => {
-    let chartInstance = null;
-
-    if (chartRef.current) {
+    const createChart = () => {
       const canvas = chartRef.current;
 
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+      if (canvas) {
+        if (chartInstance) {
+          chartInstance.destroy();
+        }
 
-      chartInstance = new Chart(canvas, {
-        type: "bar",
-        data: chartData,
-        options: {
-          scales: {
-            x: {
-              type: "category",
-              ticks: {
-                color: 'black'
+        const newChartInstance = new Chart(canvas, {
+          type: "bar",
+          data: chartData,
+          options: {
+            scales: {
+              x: {
+                type: "category",
+                ticks: {
+                  color: "black",
+                },
+              },
+              y: {
+                ticks: {
+                  color: "black",
+                },
               },
             },
-            y: {
-              ticks: {
-                color: 'black'
+            plugins: {
+              legend: {
+                display: true,
+                position: "top",
               },
-            }
-          },
-          plugins: {
-            legend: {
-              display: true,
-              position: "top",
             },
-          },
-          responsive: true,
-          elements: {
-            bar: {
-              borderWidth: 2,
+            responsive: true,
+            elements: {
+              bar: {
+                borderWidth: 2,
+              },
             },
+            barPercentage: 0.5,
           },
-          barPercentage: 0.5,
-        },
-      });
-    }
+        });
+
+        setChartInstance(newChartInstance);
+      }
+    };
+
+    createChart();
 
     return () => {
       if (chartInstance) {
         chartInstance.destroy();
       }
     };
-  }, [screenWidth, chartData]);
+  }, [chartData]);
 
   // Check if there is any data to display
-  const hasData = chartData.datasets.some(dataset => dataset.data.some(data => data > 0));
+  const hasData = chartData.datasets.some((dataset) =>
+    dataset.data.some((data) => data > 0)
+  );
 
   const containerStyle = {
     width: "100%",
     maxWidth: "900px",
     margin: "20px auto",
-    textAlign: "center"
+    textAlign: "center",
   };
 
   const messageStyle = {
     fontSize: "18px",
     color: "#FF0000",
-    margin: "20px 0"
+    margin: "20px 0",
   };
 
   return (

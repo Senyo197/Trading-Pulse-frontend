@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
-import ToggleButtons from "./ToggleButtons"; // Import the new component
+import ToggleButtons from "./ToggleButtons";
 import { debounce } from "lodash";
 import { getCachedData, setCachedData } from './indexedDB';
 import Spinner from "./Spinner";

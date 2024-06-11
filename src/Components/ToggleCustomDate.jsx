@@ -19,7 +19,7 @@ const ToggleCustomDate = ({ handleSearch }) => {
   return (
     <div className="flex items-center mb-4 space-x-4">
       <label className="flex flex-col text-sm text-gray-700">
-        <span className="mb-1 font-medium">Start Date</span>
+        <span className="mb-1 font-bold">Start Date:</span>
         <input
           type="date"
           id="startDate"
@@ -29,7 +29,7 @@ const ToggleCustomDate = ({ handleSearch }) => {
         />
       </label>
       <label className="flex flex-col text-sm text-gray-700">
-        <span className="mb-1 font-medium">End Date</span>
+        <span className="mb-1 font-bold">End Date:</span>
         <input
           type="date"
           id="endDate"
