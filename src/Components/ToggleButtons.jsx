@@ -29,8 +29,10 @@ const ToggleButtons = () => {
   };
 
   const buttonStyles = (buttonName) =>
-    `transition duration-300 ease-in-out ${
-      activeButton === buttonName ? "text-black bg-white" : "text-white bg-black"
+    ` ${
+      activeButton === buttonName
+        ? "text-black bg-white"
+        : "text-white bg-black"
     } hover:bg-white hover:text-black px-3 text-xs rounded-md`;
 
   return (
