@@ -21,16 +21,11 @@ const LightTooltip = styled(({ className, ...props }) => (
   },
 }));
 
-const ToggleButtons = () => {
+const ToggleButtons = ({ handleSearch }) => {
   const [activeButton, setActiveButton] = useState("");
 
   const handleSetActive = (buttonName) => {
     setActiveButton(buttonName);
-  };
-
-  const handleSearch = (startDate, endDate) => {
-    console.log(`Searching from ${startDate} to ${endDate}`);
-    // Add your fetch or search logic here
   };
 
   const buttonStyles = (buttonName) =>
