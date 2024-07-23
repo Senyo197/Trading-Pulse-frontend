@@ -22,7 +22,7 @@ const ToggleLastWeek = ({ handleSearch }) => {
 
   return (
     <div className="mb-2">
-      <button onClick={handleButtonClick} className="text-sm mt-4">
+      <button onClick={handleButtonClick} className=" text-sm mt-4">
         Last Week
       </button>
     </div>
