@@ -41,7 +41,7 @@ const BarChart = ({ chartData }) => {
               },
             },
             responsive: true,
-            maintainAspectRatio: false, // Add this option
+            maintainAspectRatio: false, // Ensure the chart is responsive
             elements: {
               bar: {
                 borderWidth: 2,
@@ -70,10 +70,16 @@ const BarChart = ({ chartData }) => {
   );
 
   const containerStyle = {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
     width: "100%",
     maxWidth: "900px",
-    height: "400px", // Ensure a fixed height
-    margin: "20px auto",
+    height: "60vh", // Maintain a fixed height for the chart
+    margin: "0 auto",
+    padding: "20px",
+    boxSizing: "border-box",
     textAlign: "center",
   };
 

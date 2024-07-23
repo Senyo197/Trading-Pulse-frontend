@@ -125,14 +125,37 @@ const USDChart = () => {
     debouncedFetchData(startDate, endDate);
   };
 
+  const containerStyle = {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    padding: "20px",
+    boxSizing: "border-box",
+  };
+
+  const chartContainerStyle = {
+    width: "100%",
+    maxWidth: "900px",
+    height: "60vh",
+    margin: "0 auto",
+  };
+
   return (
-    <div>
+    <div style={containerStyle}>
       <h1 className="text-xl mb-12 font-bold">
         USD Economic Events Since 2007
       </h1>
       <ToggleCustomDate handleSearch={handleSearch} />
       <ToggleButtons handleSearch={handleSearch} />
-      {loading ? <Spinner /> : <BarChart chartData={chartData} />}
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div style={chartContainerStyle}>
+          <BarChart chartData={chartData} />
+        </div>
+      )}
     </div>
   );
 };
