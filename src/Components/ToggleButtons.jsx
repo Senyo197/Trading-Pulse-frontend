@@ -28,6 +28,11 @@ const ToggleButtons = () => {
     setActiveButton(buttonName);
   };
 
+  const handleSearch = (startDate, endDate) => {
+    console.log(`Searching from ${startDate} to ${endDate}`);
+    // Add your fetch or search logic here
+  };
+
   const buttonStyles = (buttonName) =>
     ` ${
       activeButton === buttonName
@@ -44,7 +49,7 @@ const ToggleButtons = () => {
             handleSetActive("lastWeek");
           }}
         >
-          <ToggleLastWeek />
+          <ToggleLastWeek handleSearch={handleSearch} />
         </div>
       </LightTooltip>
       <LightTooltip title="This Month" arrow placement="bottom">
@@ -54,7 +59,7 @@ const ToggleButtons = () => {
             handleSetActive("thisMonth");
           }}
         >
-          <ToggleThisMonth />
+          <ToggleThisMonth handleSearch={handleSearch} />
         </div>
       </LightTooltip>
       <LightTooltip title="Last Month" arrow placement="bottom">
@@ -64,7 +69,7 @@ const ToggleButtons = () => {
             handleSetActive("lastMonth");
           }}
         >
-          <ToggleLastMonth />
+          <ToggleLastMonth handleSearch={handleSearch} />
         </div>
       </LightTooltip>
       <LightTooltip title="This Year" arrow placement="bottom">
@@ -74,7 +79,7 @@ const ToggleButtons = () => {
             handleSetActive("thisYear");
           }}
         >
-          <ToggleThisYear />
+          <ToggleThisYear handleSearch={handleSearch} />
         </div>
       </LightTooltip>
       <LightTooltip title="Last Year" arrow placement="bottom">
@@ -84,7 +89,7 @@ const ToggleButtons = () => {
             handleSetActive("lastYear");
           }}
         >
-          <ToggleLastYear />
+          <ToggleLastYear handleSearch={handleSearch} />
         </div>
       </LightTooltip>
     </div>
