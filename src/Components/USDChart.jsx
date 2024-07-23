@@ -4,7 +4,7 @@ import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
 import ToggleButtons from "./ToggleButtons";
 import { debounce } from "lodash";
-import { getCachedData, setCachedData } from './indexedDB';
+import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
 
 const USDChart = () => {
@@ -20,7 +20,7 @@ const USDChart = () => {
   const fetchData = async (startDate = "", endDate = "") => {
     setLoading(true);
     try {
-      const impactLevels = ['L', 'M', 'H'];
+      const impactLevels = ["L", "M", "H"];
       const fetchPromises = impactLevels.map(async (impact) => {
         const cacheKey = `USD_${impact}_${startDate}_${endDate}`;
         const cachedResponse = await getCachedData(cacheKey);
@@ -28,14 +28,17 @@ const USDChart = () => {
         if (cachedResponse) {
           return { impact, data: cachedResponse.data };
         } else {
-          const response = await axios.get("https://senyo197.pythonanywhere.com/api/economic-events/", {
-            params: {
-              currency: "USD",
-              impact_level: impact,
-              start_date: startDate,
-              end_date: endDate
-            },
-          });
+          const response = await axios.get(
+            "https://senyo197.pythonanywhere.com/api/economic-events/",
+            {
+              params: {
+                currency: "USD",
+                impact_level: impact,
+                start_date: startDate,
+                end_date: endDate,
+              },
+            }
+          );
 
           await setCachedData(cacheKey, response.data);
           return { impact, data: response.data };
@@ -49,9 +52,9 @@ const USDChart = () => {
         return acc;
       }, {});
 
-      setLowEvents(fetchedData['L']);
-      setModerateEvents(fetchedData['M']);
-      setHighEvents(fetchedData['H']);
+      setLowEvents(fetchedData["L"]);
+      setModerateEvents(fetchedData["M"]);
+      setHighEvents(fetchedData["H"]);
     } catch (error) {
       console.error("Error fetching data:", error);
     } finally {
@@ -66,12 +69,12 @@ const USDChart = () => {
     let neutralCount = 0;
     let negativeCount = 0;
 
-    eventsData.forEach(data => {
-      if (data.outcome === 'positive') {
+    eventsData.forEach((data) => {
+      if (data.outcome === "positive") {
         positiveCount++;
-      } else if (data.outcome === 'neutral') {
+      } else if (data.outcome === "neutral") {
         neutralCount++;
-      } else if (data.outcome === 'negative') {
+      } else if (data.outcome === "negative") {
         negativeCount++;
       }
     });
@@ -80,42 +83,42 @@ const USDChart = () => {
   };
 
   const chartData = {
-    labels: ['Low Events', 'Moderate Events', 'High Events'],
+    labels: ["Low Events", "Moderate Events", "High Events"],
     datasets: [
       {
-        label: 'Positive',
+        label: "Positive",
         data: [
           countOutcomes(lowEvents).positiveCount,
           countOutcomes(moderateEvents).positiveCount,
-          countOutcomes(highEvents).positiveCount
+          countOutcomes(highEvents).positiveCount,
         ],
-        backgroundColor: 'rgba(0, 168, 243)',
-        borderColor: 'rgba(0, 168, 243, 1)',
-        borderWidth: 1
+        backgroundColor: "rgba(0, 168, 243)",
+        borderColor: "rgba(0, 168, 243, 1)",
+        borderWidth: 1,
       },
       {
-        label: 'Neutral',
+        label: "Neutral",
         data: [
           countOutcomes(lowEvents).neutralCount,
           countOutcomes(moderateEvents).neutralCount,
-          countOutcomes(highEvents).neutralCount
+          countOutcomes(highEvents).neutralCount,
         ],
-        backgroundColor: 'rgba(88, 88, 88, 0.8)',
-        borderColor: 'rgba(88, 88, 88, 1)',
-        borderWidth: 1
+        backgroundColor: "rgba(88, 88, 88, 0.8)",
+        borderColor: "rgba(88, 88, 88, 1)",
+        borderWidth: 1,
       },
       {
-        label: 'Negative',
+        label: "Negative",
         data: [
           countOutcomes(lowEvents).negativeCount,
           countOutcomes(moderateEvents).negativeCount,
-          countOutcomes(highEvents).negativeCount
+          countOutcomes(highEvents).negativeCount,
         ],
-        backgroundColor: 'rgba(236, 28, 36, 0.8)',
-        borderColor: 'rgba(236, 28, 36, 1)',
-        borderWidth: 1
-      }
-    ]
+        backgroundColor: "rgba(236, 28, 36, 0.8)",
+        borderColor: "rgba(236, 28, 36, 1)",
+        borderWidth: 1,
+      },
+    ],
   };
 
   const handleSearch = (startDate, endDate) => {
@@ -124,7 +127,9 @@ const USDChart = () => {
 
   return (
     <div>
-      <h1 className="text-xl mb-12 font-bold">USD Economic Events Since 2007</h1>
+      <h1 className="text-xl mb-12 font-bold">
+        USD Economic Events Since 2007
+      </h1>
       <ToggleCustomDate handleSearch={handleSearch} />
       <ToggleButtons handleSearch={handleSearch} />
       {loading ? <Spinner /> : <BarChart chartData={chartData} />}

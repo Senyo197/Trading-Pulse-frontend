@@ -41,6 +41,7 @@ const BarChart = ({ chartData }) => {
               },
             },
             responsive: true,
+            maintainAspectRatio: false, // Add this option
             elements: {
               bar: {
                 borderWidth: 2,
@@ -71,6 +72,7 @@ const BarChart = ({ chartData }) => {
   const containerStyle = {
     width: "100%",
     maxWidth: "900px",
+    height: "400px", // Ensure a fixed height
     margin: "20px auto",
     textAlign: "center",
   };
