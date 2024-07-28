@@ -92,7 +92,7 @@ const USDChart = () => {
           countOutcomes(moderateEvents).positiveCount,
           countOutcomes(highEvents).positiveCount,
         ],
-        backgroundColor: "rgba(0, 168, 243)",
+        backgroundColor: "rgba(0, 168, 243, 0.8)",
         borderColor: "rgba(0, 168, 243, 1)",
         borderWidth: 1,
       },
@@ -125,30 +125,20 @@ const USDChart = () => {
     debouncedFetchData(startDate, endDate);
   };
 
-  const containerStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    width: "100%",
-    padding: "20px",
-    boxSizing: "border-box",
-  };
-
   const chartContainerStyle = {
-    width: "100%",
-    maxWidth: "900px",
-    height: "60vh",
-    margin: "0 auto",
+    margin: "auto",
+    width: "80%", // Adjust this width as per your design needs
   };
 
   return (
-    <div style={containerStyle}>
+    <div className="flex flex-col items-center justify-center">
       <h1 className="text-xl mb-12 font-bold">
         USD Economic Events Since 2007
       </h1>
-      <ToggleCustomDate handleSearch={handleSearch} />
-      <ToggleButtons handleSearch={handleSearch} />
+      <div className="flex">
+        <ToggleCustomDate handleSearch={handleSearch} />
+        <ToggleButtons handleSearch={handleSearch} />
+      </div>
       {loading ? (
         <Spinner />
       ) : (
