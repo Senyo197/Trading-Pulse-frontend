@@ -9,23 +9,7 @@ const ToggleButtons = ({ handleSearch }) => {
   const [activeOption, setActiveOption] = useState("");
 
   const handleSelectChange = (event) => {
-    const selectedOption = event.target.value;
-    setActiveOption(selectedOption);
-
-    switch (selectedOption) {
-      case "lastWeek":
-        return <ToggleLastWeek handleSearch={handleSearch} />;
-      case "thisMonth":
-        return <ToggleThisMonth handleSearch={handleSearch} />;
-      case "lastMonth":
-        return <ToggleLastMonth handleSearch={handleSearch} />;
-      case "thisYear":
-        return <ToggleThisYear handleSearch={handleSearch} />;
-      case "lastYear":
-        return <ToggleLastYear handleSearch={handleSearch} />;
-      default:
-        return null;
-    }
+    setActiveOption(event.target.value);
   };
 
   return (
@@ -44,6 +28,21 @@ const ToggleButtons = ({ handleSearch }) => {
         <option value="thisYear">This Year</option>
         <option value="lastYear">Last Year</option>
       </select>
+      {activeOption === "lastWeek" && (
+        <ToggleLastWeek handleSearch={handleSearch} />
+      )}
+      {activeOption === "thisMonth" && (
+        <ToggleThisMonth handleSearch={handleSearch} />
+      )}
+      {activeOption === "lastMonth" && (
+        <ToggleLastMonth handleSearch={handleSearch} />
+      )}
+      {activeOption === "thisYear" && (
+        <ToggleThisYear handleSearch={handleSearch} />
+      )}
+      {activeOption === "lastYear" && (
+        <ToggleLastYear handleSearch={handleSearch} />
+      )}
     </div>
   );
 };
