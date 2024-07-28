@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ToggleLastYear = ({ handleSearch }) => {
-  const handleButtonClick = () => {
+  useEffect(() => {
     const currentDate = new Date();
     const lastYearStartDate = new Date(currentDate.getFullYear() - 1, 0, 1)
       .toISOString()
@@ -10,15 +10,9 @@ const ToggleLastYear = ({ handleSearch }) => {
       .toISOString()
       .split("T")[0];
     handleSearch(lastYearStartDate, lastYearEndDate);
-  };
+  }, [handleSearch]);
 
-  return (
-    <div className="mb-2">
-      <button onClick={handleButtonClick} className="text-sm mt-4 ml-2">
-        Last Year
-      </button>
-    </div>
-  );
+  return null;
 };
 
 export default ToggleLastYear;

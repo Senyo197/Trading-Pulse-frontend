@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ToggleLastWeek = ({ handleSearch }) => {
-  const handleButtonClick = () => {
+  useEffect(() => {
     const currentDate = new Date();
     const lastWeekStartDate = new Date(
       currentDate.getFullYear(),
@@ -18,15 +18,9 @@ const ToggleLastWeek = ({ handleSearch }) => {
       .toISOString()
       .split("T")[0];
     handleSearch(lastWeekStartDate, lastWeekEndDate);
-  };
+  }, [handleSearch]);
 
-  return (
-    <div className="mb-2">
-      <button onClick={handleButtonClick} className=" text-sm mt-4">
-        Last Week
-      </button>
-    </div>
-  );
+  return null;
 };
 
 export default ToggleLastWeek;

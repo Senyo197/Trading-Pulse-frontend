@@ -92,7 +92,7 @@ const USDChart = () => {
           countOutcomes(moderateEvents).positiveCount,
           countOutcomes(highEvents).positiveCount,
         ],
-        backgroundColor: "rgba(0, 168, 243, 0.8)",
+        backgroundColor: "rgba(0, 168, 243)",
         borderColor: "rgba(0, 168, 243, 1)",
         borderWidth: 1,
       },
@@ -103,7 +103,7 @@ const USDChart = () => {
           countOutcomes(moderateEvents).neutralCount,
           countOutcomes(highEvents).neutralCount,
         ],
-        backgroundColor: "rgba(88, 88, 88, 0.8)",
+        backgroundColor: "rgba(88, 88, 88)",
         borderColor: "rgba(88, 88, 88, 1)",
         borderWidth: 1,
       },
@@ -114,35 +114,25 @@ const USDChart = () => {
           countOutcomes(moderateEvents).negativeCount,
           countOutcomes(highEvents).negativeCount,
         ],
-        backgroundColor: "rgba(236, 28, 36, 0.8)",
-        borderColor: "rgba(236, 28, 36, 1)",
+        backgroundColor: "rgba(246, 70, 93)",
+        borderColor: "rgba(246, 70, 93, 1)",
         borderWidth: 1,
       },
     ],
   };
 
-  const handleSearch = (startDate, endDate) => {
-    debouncedFetchData(startDate, endDate);
-  };
-
-  const chartContainerStyle = {
-    margin: "auto",
-    width: "80%", // Adjust this width as per your design needs
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center">
-      <h1 className="text-xl mb-12 font-bold">
-        USD Economic Events Since 2007
-      </h1>
-      <div className="">
-        <ToggleCustomDate handleSearch={handleSearch} />
-        <ToggleButtons handleSearch={handleSearch} />
+    <div className="p-4 sm:ml-64">
+      <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
+        <ToggleCustomDate handleSearch={debouncedFetchData} />
+        <div className="ml-8">
+          <ToggleButtons handleSearch={debouncedFetchData} />
+        </div>
       </div>
       {loading ? (
         <Spinner />
       ) : (
-        <div style={chartContainerStyle}>
+        <div className="chart-container">
           <BarChart chartData={chartData} />
         </div>
       )}

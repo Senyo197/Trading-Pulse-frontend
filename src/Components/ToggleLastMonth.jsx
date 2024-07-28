@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ToggleLastMonth = ({ handleSearch }) => {
-  const handleButtonClick = () => {
+  useEffect(() => {
     const currentDate = new Date();
     const lastMonthStartDate = new Date(
       currentDate.getFullYear(),
@@ -18,15 +18,9 @@ const ToggleLastMonth = ({ handleSearch }) => {
       .toISOString()
       .split("T")[0];
     handleSearch(lastMonthStartDate, lastMonthEndDate);
-  };
+  }, [handleSearch]);
 
-  return (
-    <div className="mb-2">
-      <button onClick={handleButtonClick} className="text-sm mt-4 ml-2">
-        Last Month
-      </button>
-    </div>
-  );
+  return null;
 };
 
 export default ToggleLastMonth;

@@ -1,28 +1,22 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 const ToggleThisYear = ({ handleSearch }) => {
-  const handleButtonClick = () => {
+  useEffect(() => {
     const currentDate = new Date();
     const thisYearStartDate = new Date(currentDate.getFullYear(), 0, 1)
       .toISOString()
       .split("T")[0];
-    const lastWeekEndDate = new Date(
+    const thisYearEndDate = new Date(
       currentDate.getFullYear(),
       currentDate.getMonth(),
-      currentDate.getDate() - currentDate.getDay()
+      currentDate.getDate()
     )
       .toISOString()
       .split("T")[0];
-    handleSearch(thisYearStartDate, lastWeekEndDate);
-  };
+    handleSearch(thisYearStartDate, thisYearEndDate);
+  }, [handleSearch]);
 
-  return (
-    <div className="mb-2">
-      <button onClick={handleButtonClick} className="text-sm mt-4 ml-2">
-        This Year
-      </button>
-    </div>
-  );
+  return null;
 };
 
 export default ToggleThisYear;

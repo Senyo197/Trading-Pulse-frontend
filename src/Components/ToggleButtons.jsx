@@ -1,92 +1,49 @@
 import React, { useState } from "react";
-import Tooltip, { tooltipClasses } from "@mui/material/Tooltip";
-import { styled } from "@mui/material/styles";
 import ToggleLastWeek from "./ToggleLastWeek";
 import ToggleThisMonth from "./ToggleThisMonth";
 import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 
-const LightTooltip = styled(({ className, ...props }) => (
-  <Tooltip {...props} classes={{ popper: className }} />
-))(({ theme }) => ({
-  [`& .${tooltipClasses.tooltip}`]: {
-    backgroundColor: theme.palette.common.black,
-    color: "white",
-    boxShadow: theme.shadows[1],
-    fontSize: 10,
-    "& .MuiTooltip-arrow": {
-      color: "black",
-    },
-  },
-}));
-
 const ToggleButtons = ({ handleSearch }) => {
-  const [activeButton, setActiveButton] = useState("");
+  const [activeOption, setActiveOption] = useState("");
 
-  const handleSetActive = (buttonName) => {
-    setActiveButton(buttonName);
+  const handleSelectChange = (event) => {
+    const selectedOption = event.target.value;
+    setActiveOption(selectedOption);
+
+    switch (selectedOption) {
+      case "lastWeek":
+        return <ToggleLastWeek handleSearch={handleSearch} />;
+      case "thisMonth":
+        return <ToggleThisMonth handleSearch={handleSearch} />;
+      case "lastMonth":
+        return <ToggleLastMonth handleSearch={handleSearch} />;
+      case "thisYear":
+        return <ToggleThisYear handleSearch={handleSearch} />;
+      case "lastYear":
+        return <ToggleLastYear handleSearch={handleSearch} />;
+      default:
+        return null;
+    }
   };
 
-  const buttonStyles = (buttonName) =>
-    ` ${
-      activeButton === buttonName
-        ? "text-black bg-white"
-        : "text-white bg-black"
-    } hover:bg-white hover:text-black px-3 text-xs rounded-md`;
-
   return (
-    <div className="flex mb-20 space-x-2">
-      <LightTooltip title="Last Week" arrow placement="bottom">
-        <div
-          className={buttonStyles("lastWeek")}
-          onClick={() => {
-            handleSetActive("lastWeek");
-          }}
-        >
-          <ToggleLastWeek handleSearch={handleSearch} />
-        </div>
-      </LightTooltip>
-      <LightTooltip title="This Month" arrow placement="bottom">
-        <div
-          className={buttonStyles("thisMonth")}
-          onClick={() => {
-            handleSetActive("thisMonth");
-          }}
-        >
-          <ToggleThisMonth handleSearch={handleSearch} />
-        </div>
-      </LightTooltip>
-      <LightTooltip title="Last Month" arrow placement="bottom">
-        <div
-          className={buttonStyles("lastMonth")}
-          onClick={() => {
-            handleSetActive("lastMonth");
-          }}
-        >
-          <ToggleLastMonth handleSearch={handleSearch} />
-        </div>
-      </LightTooltip>
-      <LightTooltip title="This Year" arrow placement="bottom">
-        <div
-          className={buttonStyles("thisYear")}
-          onClick={() => {
-            handleSetActive("thisYear");
-          }}
-        >
-          <ToggleThisYear handleSearch={handleSearch} />
-        </div>
-      </LightTooltip>
-      <LightTooltip title="Last Year" arrow placement="bottom">
-        <div
-          className={buttonStyles("lastYear")}
-          onClick={() => {
-            handleSetActive("lastYear");
-          }}
-        >
-          <ToggleLastYear handleSearch={handleSearch} />
-        </div>
-      </LightTooltip>
+    <div className="mb-4">
+      <select
+        value={activeOption}
+        onChange={handleSelectChange}
+        className="bg-black text-white p-2 rounded-md"
+      >
+        <option value="" disabled>
+          Select Time Range
+        </option>
+        <option value="lastWeek">Last Week</option>
+        <option value="thisMonth">This Month</option>
+        <option value="lastMonth">Last Month</option>
+        <option value="thisYear">This Year</option>
+        <option value="lastYear">Last Year</option>
+      </select>
     </div>
   );
 };

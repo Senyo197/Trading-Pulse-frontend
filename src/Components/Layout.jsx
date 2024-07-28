@@ -10,7 +10,7 @@ export default function Layout({ children }) {
       </div>
       <div className="">
         <Navbar />
-        <main className="flex-grow p-8">{children}</main>
+        <main className="flex-grow">{children}</main>
       </div>
     </div>
   );
