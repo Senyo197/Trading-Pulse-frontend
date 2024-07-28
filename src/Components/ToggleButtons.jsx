@@ -1,45 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ToggleLastWeek from "./ToggleLastWeek";
 import ToggleThisMonth from "./ToggleThisMonth";
 import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 
-const ToggleButtons = ({ handleSearch, setLoading }) => {
+const ToggleButtons = ({ handleSearch }) => {
   const [activeOption, setActiveOption] = useState("");
 
   const handleSelectChange = (event) => {
     setActiveOption(event.target.value);
-  };
-
-  useEffect(() => {
-    if (activeOption) {
-      setLoading(true);
-      console.log(`Fetching data for: ${activeOption}`);
-      handleSearch(activeOption)
-        .then(() => setLoading(false))
-        .catch((error) => {
-          console.error("Error fetching data:", error);
-          setLoading(false);
-        });
-    }
-  }, [activeOption, handleSearch, setLoading]);
-
-  const renderToggleComponent = () => {
-    switch (activeOption) {
-      case "lastWeek":
-        return <ToggleLastWeek handleSearch={handleSearch} />;
-      case "thisMonth":
-        return <ToggleThisMonth handleSearch={handleSearch} />;
-      case "lastMonth":
-        return <ToggleLastMonth handleSearch={handleSearch} />;
-      case "thisYear":
-        return <ToggleThisYear handleSearch={handleSearch} />;
-      case "lastYear":
-        return <ToggleLastYear handleSearch={handleSearch} />;
-      default:
-        return null;
-    }
   };
 
   return (
@@ -58,7 +28,21 @@ const ToggleButtons = ({ handleSearch, setLoading }) => {
         <option value="thisYear">This Year</option>
         <option value="lastYear">Last Year</option>
       </select>
-      {renderToggleComponent()}
+      {activeOption === "lastWeek" && (
+        <ToggleLastWeek handleSearch={handleSearch} />
+      )}
+      {activeOption === "thisMonth" && (
+        <ToggleThisMonth handleSearch={handleSearch} />
+      )}
+      {activeOption === "lastMonth" && (
+        <ToggleLastMonth handleSearch={handleSearch} />
+      )}
+      {activeOption === "thisYear" && (
+        <ToggleThisYear handleSearch={handleSearch} />
+      )}
+      {activeOption === "lastYear" && (
+        <ToggleLastYear handleSearch={handleSearch} />
+      )}
     </div>
   );
 };

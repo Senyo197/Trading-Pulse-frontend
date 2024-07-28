@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
@@ -62,7 +62,7 @@ const USDChart = () => {
     }
   };
 
-  const debouncedFetchData = useCallback(debounce(fetchData, 300), []);
+  const debouncedFetchData = debounce(fetchData, 300);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
