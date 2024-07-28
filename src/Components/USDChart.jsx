@@ -135,7 +135,7 @@ const USDChart = () => {
       <h1 className="text-xl mb-12 font-bold">
         USD Economic Events Since 2007
       </h1>
-      <div className="flex">
+      <div className="">
         <ToggleCustomDate handleSearch={handleSearch} />
         <ToggleButtons handleSearch={handleSearch} />
       </div>
