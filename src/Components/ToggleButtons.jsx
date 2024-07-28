@@ -1,23 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import ToggleLastWeek from "./ToggleLastWeek";
 import ToggleThisMonth from "./ToggleThisMonth";
 import ToggleLastMonth from "./ToggleLastMonth";
 import ToggleThisYear from "./ToggleThisYear";
 import ToggleLastYear from "./ToggleLastYear";
 
-const ToggleButtons = ({ handleSearch, setLoading }) => {
+const ToggleButtons = ({ handleSearch }) => {
   const [activeOption, setActiveOption] = useState("");
 
   const handleSelectChange = (event) => {
     setActiveOption(event.target.value);
   };
-
-  useEffect(() => {
-    if (activeOption) {
-      setLoading(true);
-      handleSearch(activeOption).finally(() => setLoading(false));
-    }
-  }, [activeOption, handleSearch, setLoading]);
 
   return (
     <div className="mb-4">
@@ -35,6 +28,21 @@ const ToggleButtons = ({ handleSearch, setLoading }) => {
         <option value="thisYear">This Year</option>
         <option value="lastYear">Last Year</option>
       </select>
+      {activeOption === "lastWeek" && (
+        <ToggleLastWeek handleSearch={handleSearch} />
+      )}
+      {activeOption === "thisMonth" && (
+        <ToggleThisMonth handleSearch={handleSearch} />
+      )}
+      {activeOption === "lastMonth" && (
+        <ToggleLastMonth handleSearch={handleSearch} />
+      )}
+      {activeOption === "thisYear" && (
+        <ToggleThisYear handleSearch={handleSearch} />
+      )}
+      {activeOption === "lastYear" && (
+        <ToggleLastYear handleSearch={handleSearch} />
+      )}
     </div>
   );
 };
