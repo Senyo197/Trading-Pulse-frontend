@@ -13,21 +13,9 @@ const ToggleButtons = ({ handleSearch, setLoading }) => {
   };
 
   useEffect(() => {
-    setLoading(true);
-    switch (activeOption) {
-      case "lastWeek":
-        return <ToggleLastWeek handleSearch={handleSearch} />;
-      case "thisMonth":
-        return <ToggleThisMonth handleSearch={handleSearch} />;
-      case "lastMonth":
-        return <ToggleLastMonth handleSearch={handleSearch} />;
-      case "thisYear":
-        return <ToggleThisYear handleSearch={handleSearch} />;
-      case "lastYear":
-        return <ToggleLastYear handleSearch={handleSearch} />;
-      default:
-        setLoading(false);
-        return;
+    if (activeOption) {
+      setLoading(true);
+      handleSearch(activeOption).finally(() => setLoading(false));
     }
   }, [activeOption, handleSearch, setLoading]);
 
