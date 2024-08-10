@@ -126,10 +126,8 @@ const USDChart = () => {
 
   return (
     <div className="p-4 sm:ml-64">
-      <h1 className="text-xl mb-12 font-bold">
-        USD Economic Events Since 2007
-      </h1>
-      <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
+      <h1 className="text-xl mb-4 font-bold">USD Economic Events Since 2007</h1>
+      <div className="sm:flex sm:justify-between sm:items-center sm:mb-2">
         <ToggleCustomDate />
         <div className="ml-8">
           <ToggleSelect />
