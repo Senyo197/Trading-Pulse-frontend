@@ -15,29 +15,32 @@ import NZDChart from "./Components/NZDChart";
 import Footer from "./Components/Footer";
 import About from "./Components/About";
 import Disclaimer from "./Components/Disclaimer";
+import { SearchProvider } from "./Components/SearchContext";
 
 export default function App() {
   return (
     <Router>
-      <Layout>
-        <div className="flex">
-          <Routes>
-            <Route exact path="/about" element={<About />} />
-            <Route exact path="/disclaimer" element={<Disclaimer />} />
-            <Route exact path="/aud" element={<AUDChart />} />
-            <Route exact path="/" element={<USDChart />} />
-            <Route exact path="/cad" element={<CADChart />} />
-            <Route exact path="/chf" element={<CHFChart />} />
-            <Route exact path="/cny" element={<CNYChart />} />
-            <Route exact path="/eur" element={<EURChart />} />
-            <Route exact path="/gbp" element={<GBPChart />} />
-            <Route exact path="/jpy" element={<JPYChart />} />
-            <Route exact path="/nzd" element={<NZDChart />} />
-            <Route path="*" element={<NotFound />} />
-          </Routes>
-        </div>
-      </Layout>
-      <Footer />
+      <SearchProvider>
+        <Layout>
+          <div className="flex">
+            <Routes>
+              <Route path="/about" element={<About />} />
+              <Route path="/disclaimer" element={<Disclaimer />} />
+              <Route path="/aud" element={<AUDChart />} />
+              <Route path="/" element={<USDChart />} />
+              <Route path="/cad" element={<CADChart />} />
+              <Route path="/chf" element={<CHFChart />} />
+              <Route path="/cny" element={<CNYChart />} />
+              <Route path="/eur" element={<EURChart />} />
+              <Route path="/gbp" element={<GBPChart />} />
+              <Route path="/jpy" element={<JPYChart />} />
+              <Route path="/nzd" element={<NZDChart />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </div>
+        </Layout>
+        <Footer />
+      </SearchProvider>
     </Router>
   );
 }
