@@ -1,51 +1,13 @@
 import React, { useState } from "react";
 import { useSearch } from "./SearchContext";
+import TogglePeriod from "./TogglePeriod";
 
 const ToggleSelect = () => {
   const [selectedPeriod, setSelectedPeriod] = useState("all");
   const { handleSearch } = useSearch();
 
   const handleSelectChange = (e) => {
-    const period = e.target.value;
-    setSelectedPeriod(period);
-    const dateRanges = {
-      all: ["", ""],
-      lastWeek: [
-        new Date(new Date().setDate(new Date().getDate() - 7))
-          .toISOString()
-          .split("T")[0],
-        new Date().toISOString().split("T")[0],
-      ],
-      thisMonth: [
-        new Date(new Date().getFullYear(), new Date().getMonth(), 1)
-          .toISOString()
-          .split("T")[0],
-        new Date().toISOString().split("T")[0],
-      ],
-      lastMonth: [
-        new Date(new Date().getFullYear(), new Date().getMonth() - 1, 1)
-          .toISOString()
-          .split("T")[0],
-        new Date(new Date().getFullYear(), new Date().getMonth(), 0)
-          .toISOString()
-          .split("T")[0],
-      ],
-      thisYear: [
-        new Date(new Date().getFullYear(), 0, 1).toISOString().split("T")[0],
-        new Date().toISOString().split("T")[0],
-      ],
-      lastYear: [
-        new Date(new Date().getFullYear() - 1, 0, 1)
-          .toISOString()
-          .split("T")[0],
-        new Date(new Date().getFullYear() - 1, 11, 31)
-          .toISOString()
-          .split("T")[0],
-      ],
-    };
-
-    const [startDate, endDate] = dateRanges[period];
-    handleSearch(startDate, endDate);
+    setSelectedPeriod(e.target.value);
   };
 
   return (
@@ -65,6 +27,11 @@ const ToggleSelect = () => {
           <option value="lastYear">Last Year</option>
         </select>
       </label>
+
+      {/* Conditionally render TogglePeriod based on selectedPeriod */}
+      {selectedPeriod !== "all" && (
+        <TogglePeriod period={selectedPeriod} handleSearch={handleSearch} />
+      )}
     </div>
   );
 };
