@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
@@ -82,44 +82,47 @@ const USDChart = () => {
     return { positiveCount, neutralCount, negativeCount };
   };
 
-  const chartData = {
-    labels: ["Low Events", "Moderate Events", "High Events"],
-    datasets: [
-      {
-        label: "Positive",
-        data: [
-          countOutcomes(lowEvents).positiveCount,
-          countOutcomes(moderateEvents).positiveCount,
-          countOutcomes(highEvents).positiveCount,
-        ],
-        backgroundColor: "rgba(0, 168, 243)",
-        borderColor: "rgba(0, 168, 243, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Neutral",
-        data: [
-          countOutcomes(lowEvents).neutralCount,
-          countOutcomes(moderateEvents).neutralCount,
-          countOutcomes(highEvents).neutralCount,
-        ],
-        backgroundColor: "rgba(88, 88, 88)",
-        borderColor: "rgba(88, 88, 88, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Negative",
-        data: [
-          countOutcomes(lowEvents).negativeCount,
-          countOutcomes(moderateEvents).negativeCount,
-          countOutcomes(highEvents).negativeCount,
-        ],
-        backgroundColor: "rgba(246, 70, 93)",
-        borderColor: "rgba(246, 70, 93, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
+  const chartData = useMemo(
+    () => ({
+      labels: ["Low Events", "Moderate Events", "High Events"],
+      datasets: [
+        {
+          label: "Positive",
+          data: [
+            countOutcomes(lowEvents).positiveCount,
+            countOutcomes(moderateEvents).positiveCount,
+            countOutcomes(highEvents).positiveCount,
+          ],
+          backgroundColor: "rgba(0, 168, 243)",
+          borderColor: "rgba(0, 168, 243, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Neutral",
+          data: [
+            countOutcomes(lowEvents).neutralCount,
+            countOutcomes(moderateEvents).neutralCount,
+            countOutcomes(highEvents).neutralCount,
+          ],
+          backgroundColor: "rgba(88, 88, 88)",
+          borderColor: "rgba(88, 88, 88, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Negative",
+          data: [
+            countOutcomes(lowEvents).negativeCount,
+            countOutcomes(moderateEvents).negativeCount,
+            countOutcomes(highEvents).negativeCount,
+          ],
+          backgroundColor: "rgba(246, 70, 93)",
+          borderColor: "rgba(246, 70, 93, 1)",
+          borderWidth: 1,
+        },
+      ],
+    }),
+    [lowEvents, moderateEvents, highEvents]
+  );
 
   return (
     <div className="p-4 sm:ml-64">
