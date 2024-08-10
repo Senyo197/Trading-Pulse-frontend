@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
@@ -13,7 +13,11 @@ const USDChart = () => {
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchData = useCallback(async (startDate = "", endDate = "") => {
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async (startDate = "", endDate = "") => {
     setLoading(true);
     try {
       const impactLevels = ["L", "M", "H"];
@@ -56,9 +60,9 @@ const USDChart = () => {
     } finally {
       setLoading(false);
     }
-  }, []);
+  };
 
-  const debouncedFetchData = useCallback(debounce(fetchData, 300), [fetchData]);
+  const debouncedFetchData = debounce(fetchData, 300);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
