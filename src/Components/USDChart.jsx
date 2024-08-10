@@ -3,6 +3,7 @@ import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
 import ToggleSelect from "./ToggleSelect";
+import { debounce } from "lodash";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
 
@@ -60,6 +61,8 @@ const USDChart = () => {
       setLoading(false);
     }
   };
+
+  const debouncedFetchData = debounce(fetchData, 300);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
@@ -124,9 +127,12 @@ const USDChart = () => {
   return (
     <div className="p-4 sm:ml-64">
       <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
-        <ToggleCustomDate />
+        <ToggleCustomDate handleSearch={debouncedFetchData} />
         <div className="ml-8">
-          <ToggleSelect />
+          <ToggleSelect
+            handleSearch={debouncedFetchData}
+            setLoading={setLoading}
+          />
         </div>
       </div>
       {loading ? (

@@ -80,6 +80,9 @@ const TogglePeriod = ({ period, handleSearch }) => {
         endDate = "";
     }
 
+    console.log(
+      `Period: ${period}, Start Date: ${startDate}, End Date: ${endDate}`
+    );
     handleSearch(startDate, endDate);
   }, [period, handleSearch]);
 
