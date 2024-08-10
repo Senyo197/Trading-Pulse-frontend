@@ -64,7 +64,6 @@ const BarChart = ({ chartData }) => {
     };
   }, [chartData]);
 
-  // Check if there is any data to display
   const hasData = chartData.datasets.some((dataset) =>
     dataset.data.some((data) => data > 0)
   );
