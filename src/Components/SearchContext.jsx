@@ -9,7 +9,6 @@ export const SearchProvider = ({ children }) => {
   });
 
   const handleSearch = useCallback((startDate, endDate) => {
-    // Update searchParams and perform search if necessary
     console.log("Searching with:", startDate, endDate);
     setSearchParams({ startDate, endDate });
   }, []);

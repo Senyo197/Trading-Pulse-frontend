@@ -1,19 +1,20 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
+import ToggleSelect from "./ToggleSelect";
 import ToggleCustomDate from "./ToggleCustomDate";
-import ToggleButtons from "./ToggleButtons";
-import { debounce } from "lodash";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
-import { useSearch } from "./SearchContext";
 
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const { searchParams, handleSearch } = useSearch();
+  const [searchParams, setSearchParams] = useState({
+    startDate: "",
+    endDate: "",
+  });
 
   useEffect(() => {
     fetchData(searchParams.startDate, searchParams.endDate);
@@ -63,8 +64,6 @@ const USDChart = () => {
       setLoading(false);
     }
   };
-
-  const debouncedFetchData = debounce(fetchData, 300);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
@@ -131,7 +130,7 @@ const USDChart = () => {
       <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
         <ToggleCustomDate />
         <div className="ml-8">
-          <ToggleButtons />
+          <ToggleSelect />
         </div>
       </div>
       {loading ? (
