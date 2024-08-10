@@ -136,7 +136,7 @@ const USDChart = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="chart-container md:mt-8">
+        <div className="chart-container md:mt-12">
           <BarChart chartData={chartData} />
         </div>
       )}

@@ -28,7 +28,6 @@ const ToggleSelect = () => {
         </select>
       </label>
 
-      {/* Conditionally render TogglePeriod based on selectedPeriod */}
       {selectedPeriod !== "all" && (
         <TogglePeriod period={selectedPeriod} handleSearch={handleSearch} />
       )}
