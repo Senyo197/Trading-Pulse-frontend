@@ -1,8 +1,8 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
-import ToggleSelect from "./ToggleSelect";
 import ToggleCustomDate from "./ToggleCustomDate";
+import ToggleSelect from "./ToggleSelect";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
 
@@ -11,14 +11,10 @@ const USDChart = () => {
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchParams, setSearchParams] = useState({
-    startDate: "",
-    endDate: "",
-  });
 
   useEffect(() => {
-    fetchData(searchParams.startDate, searchParams.endDate);
-  }, [searchParams]);
+    fetchData();
+  }, []);
 
   const fetchData = async (startDate = "", endDate = "") => {
     setLoading(true);
