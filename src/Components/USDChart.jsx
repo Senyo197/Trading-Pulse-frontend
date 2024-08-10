@@ -6,12 +6,14 @@ import ToggleSelect from "./ToggleSelect";
 import { debounce } from "lodash";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
+import { useSearch } from "./SearchContext"; // Import the useSearch hook
 
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
+  const handleSearch = useSearch(); // Access the handleSearch function from context
 
   useEffect(() => {
     fetchData();
@@ -127,9 +129,9 @@ const USDChart = () => {
   return (
     <div className="p-4 sm:ml-64">
       <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
-        <ToggleCustomDate handleSearch={debouncedFetchData} />
+        <ToggleCustomDate />
         <div className="ml-8">
-          <ToggleSelect handleSearch={debouncedFetchData} />
+          <ToggleSelect />
         </div>
       </div>
       {loading ? (
