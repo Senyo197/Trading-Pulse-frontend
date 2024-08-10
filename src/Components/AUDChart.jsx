@@ -1,24 +1,19 @@
 import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
-import ToggleSelect from "./ToggleSelect";
 import ToggleCustomDate from "./ToggleCustomDate";
+import ToggleSelect from "./ToggleSelect";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
+import { useSearch } from "./SearchContext";
 
 const AUDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [searchParams, setSearchParams] = useState({
-    startDate: "",
-    endDate: "",
-  });
-
-  useEffect(() => {
-    fetchData(searchParams.startDate, searchParams.endDate);
-  }, [searchParams]);
+  const { searchParams } = useSearch();
+  const { startDate, endDate } = searchParams;
 
   const fetchData = async (startDate = "", endDate = "") => {
     setLoading(true);
@@ -64,6 +59,10 @@ const AUDChart = () => {
       setLoading(false);
     }
   };
+
+  useEffect(() => {
+    fetchData(startDate, endDate);
+  }, [startDate, endDate]);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
@@ -127,7 +126,8 @@ const AUDChart = () => {
 
   return (
     <div className="p-4 sm:ml-64">
-      <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
+      <h1 className="text-xl mb-4 font-bold">AUD Economic Events Since 2007</h1>
+      <div className="sm:flex sm:justify-between sm:items-center sm:mb-2">
         <ToggleCustomDate />
         <div className="ml-8">
           <ToggleSelect />
@@ -136,7 +136,7 @@ const AUDChart = () => {
       {loading ? (
         <Spinner />
       ) : (
-        <div className="chart-container">
+        <div className="chart-container md:mt-12">
           <BarChart chartData={chartData} />
         </div>
       )}

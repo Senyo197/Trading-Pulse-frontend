@@ -1,21 +1,19 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
-import ToggleButtons from "./ToggleSelect"; // Import the new component
-import { debounce } from "lodash";
+import ToggleSelect from "./ToggleSelect";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
+import { useSearch } from "./SearchContext";
 
 const JPYChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { searchParams } = useSearch();
+  const { startDate, endDate } = searchParams;
 
   const fetchData = async (startDate = "", endDate = "") => {
     setLoading(true);
@@ -62,7 +60,9 @@ const JPYChart = () => {
     }
   };
 
-  const debouncedFetchData = debounce(fetchData, 300);
+  useEffect(() => {
+    fetchData(startDate, endDate);
+  }, [startDate, endDate]);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;
@@ -82,57 +82,64 @@ const JPYChart = () => {
     return { positiveCount, neutralCount, negativeCount };
   };
 
-  const chartData = {
-    labels: ["Low Events", "Moderate Events", "High Events"],
-    datasets: [
-      {
-        label: "Positive",
-        data: [
-          countOutcomes(lowEvents).positiveCount,
-          countOutcomes(moderateEvents).positiveCount,
-          countOutcomes(highEvents).positiveCount,
-        ],
-        backgroundColor: "rgba(0, 168, 243)",
-        borderColor: "rgba(0, 168, 243, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Neutral",
-        data: [
-          countOutcomes(lowEvents).neutralCount,
-          countOutcomes(moderateEvents).neutralCount,
-          countOutcomes(highEvents).neutralCount,
-        ],
-        backgroundColor: "rgba(88, 88, 88, 0.8)",
-        borderColor: "rgba(88, 88, 88, 1)",
-        borderWidth: 1,
-      },
-      {
-        label: "Negative",
-        data: [
-          countOutcomes(lowEvents).negativeCount,
-          countOutcomes(moderateEvents).negativeCount,
-          countOutcomes(highEvents).negativeCount,
-        ],
-        backgroundColor: "rgba(236, 28, 36, 0.8)",
-        borderColor: "rgba(236, 28, 36, 1)",
-        borderWidth: 1,
-      },
-    ],
-  };
-
-  const handleSearch = (startDate, endDate) => {
-    debouncedFetchData(startDate, endDate);
-  };
+  const chartData = useMemo(
+    () => ({
+      labels: ["Low Events", "Moderate Events", "High Events"],
+      datasets: [
+        {
+          label: "Positive",
+          data: [
+            countOutcomes(lowEvents).positiveCount,
+            countOutcomes(moderateEvents).positiveCount,
+            countOutcomes(highEvents).positiveCount,
+          ],
+          backgroundColor: "rgba(0, 168, 243)",
+          borderColor: "rgba(0, 168, 243, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Neutral",
+          data: [
+            countOutcomes(lowEvents).neutralCount,
+            countOutcomes(moderateEvents).neutralCount,
+            countOutcomes(highEvents).neutralCount,
+          ],
+          backgroundColor: "rgba(88, 88, 88)",
+          borderColor: "rgba(88, 88, 88, 1)",
+          borderWidth: 1,
+        },
+        {
+          label: "Negative",
+          data: [
+            countOutcomes(lowEvents).negativeCount,
+            countOutcomes(moderateEvents).negativeCount,
+            countOutcomes(highEvents).negativeCount,
+          ],
+          backgroundColor: "rgba(246, 70, 93)",
+          borderColor: "rgba(246, 70, 93, 1)",
+          borderWidth: 1,
+        },
+      ],
+    }),
+    [lowEvents, moderateEvents, highEvents]
+  );
 
   return (
-    <div>
-      <h1 className="text-xl mb-12 font-bold">
-        JPY Economic Events Since 2007
-      </h1>
-      <ToggleCustomDate handleSearch={handleSearch} />
-      <ToggleButtons handleSearch={handleSearch} />
-      {loading ? <Spinner /> : <BarChart chartData={chartData} />}
+    <div className="p-4 sm:ml-64">
+      <h1 className="text-xl mb-4 font-bold">JPY Economic Events Since 2007</h1>
+      <div className="sm:flex sm:justify-between sm:items-center sm:mb-2">
+        <ToggleCustomDate />
+        <div className="ml-8">
+          <ToggleSelect />
+        </div>
+      </div>
+      {loading ? (
+        <Spinner />
+      ) : (
+        <div className="chart-container md:mt-12">
+          <BarChart chartData={chartData} />
+        </div>
+      )}
     </div>
   );
 };
