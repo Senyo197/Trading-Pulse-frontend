@@ -129,10 +129,7 @@ const USDChart = () => {
       <div className="sm:flex sm:justify-between sm:items-center sm:mb-4">
         <ToggleCustomDate handleSearch={debouncedFetchData} />
         <div className="ml-8">
-          <ToggleSelect
-            handleSearch={debouncedFetchData}
-            setLoading={setLoading}
-          />
+          <ToggleSelect handleSearch={debouncedFetchData} />
         </div>
       </div>
       {loading ? (
