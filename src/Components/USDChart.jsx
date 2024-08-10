@@ -3,21 +3,17 @@ import axios from "axios";
 import BarChart from "./BarChart";
 import ToggleCustomDate from "./ToggleCustomDate";
 import ToggleSelect from "./ToggleSelect";
-import { debounce } from "lodash";
 import { getCachedData, setCachedData } from "./indexedDB";
 import Spinner from "./Spinner";
-import { useSearch } from "./SearchContext"; // Import the useSearch hook
+import { useSearch } from "./SearchContext";
 
 const USDChart = () => {
   const [lowEvents, setLowEvents] = useState([]);
   const [moderateEvents, setModerateEvents] = useState([]);
   const [highEvents, setHighEvents] = useState([]);
   const [loading, setLoading] = useState(true);
-  const handleSearch = useSearch(); // Access the handleSearch function from context
-
-  useEffect(() => {
-    fetchData();
-  }, []);
+  const { searchParams } = useSearch();
+  const { startDate, endDate } = searchParams;
 
   const fetchData = async (startDate = "", endDate = "") => {
     setLoading(true);
@@ -64,7 +60,9 @@ const USDChart = () => {
     }
   };
 
-  const debouncedFetchData = debounce(fetchData, 300);
+  useEffect(() => {
+    fetchData(startDate, endDate);
+  }, [startDate, endDate]);
 
   const countOutcomes = (eventsData) => {
     let positiveCount = 0;

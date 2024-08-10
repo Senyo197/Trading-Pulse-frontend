@@ -1,9 +1,9 @@
-import React, { createContext, useContext, useCallback } from "react";
+import React, { createContext, useContext, useState, useCallback } from "react";
 
 const SearchContext = createContext();
 
 export const SearchProvider = ({ children }) => {
-  const [searchParams, setSearchParams] = React.useState({
+  const [searchParams, setSearchParams] = useState({
     startDate: "",
     endDate: "",
   });
