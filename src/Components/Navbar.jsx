@@ -45,13 +45,20 @@ export default function Navbar() {
         className="px-6 text-white"
         aria-label="Toggle Navbar"
       >
-        {isNavbarVisible ? <CloseIcon className="text-2xl" /> : <MenuIcon className="text-xl" />}
+        {isNavbarVisible ? (
+          <CloseIcon className="text-2xl" />
+        ) : (
+          <MenuIcon className="text-xl" />
+        )}
       </button>
 
       {isNavbarVisible && (
-        <div ref={navbarRef} className="fixed top-20 left-0 px-4 bg-black h-88 w-full flex flex-col text-white items-center rounded-b-3xl">
+        <div
+          ref={navbarRef}
+          className="fixed top-20 left-0 px-4 bg-black h-88 w-full flex flex-col text-white items-center rounded-b-3xl"
+        >
           <div>
-            <Link to="/" className="mb-4 flex text-xl" onClick={closeNavbar}>
+            <Link to="/usd" className="mb-4 flex text-xl" onClick={closeNavbar}>
               USD Chart
             </Link>
             <Link to="/aud" className="mb-4 flex text-xl" onClick={closeNavbar}>
