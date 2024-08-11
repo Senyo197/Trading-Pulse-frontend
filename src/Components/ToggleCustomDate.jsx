@@ -21,7 +21,7 @@ const ToggleCustomDate = () => {
           type="date"
           value={startDate}
           onChange={handleStartDateChange}
-          className="border border-gray-300 rounded-md px-3 py-2"
+          className="border border-gray-300 rounded-md px-3 py-2 w-28"
         />
       </label>
       <label className="flex flex-col text-xs text-gray-700">
@@ -30,7 +30,7 @@ const ToggleCustomDate = () => {
           type="date"
           value={endDate}
           onChange={handleEndDateChange}
-          className="border border-gray-300 rounded-md px-3 py-2"
+          className="border border-gray-300 rounded-md px-3 py-2 w-28"
         />
       </label>
       <button
