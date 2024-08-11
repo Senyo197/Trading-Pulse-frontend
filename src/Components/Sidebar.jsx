@@ -26,7 +26,7 @@ const Sidebar = () => {
       </div>
       <div className="flex flex-col h-full justify-normal items-center">
         <Link
-          to="/usd"
+          to="/"
           className={`sidebar-item mb-4 rounded-sm ${
             activeChart === "usd" ? "active" : ""
           }`}

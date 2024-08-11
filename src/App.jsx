@@ -27,7 +27,7 @@ export default function App() {
               <Route path="/about" element={<About />} />
               <Route path="/disclaimer" element={<Disclaimer />} />
               <Route path="/aud" element={<AUDChart />} />
-              <Route path="/usd" element={<USDChart />} />
+              <Route path="/" element={<USDChart />} />
               <Route path="/cad" element={<CADChart />} />
               <Route path="/chf" element={<CHFChart />} />
               <Route path="/cny" element={<CNYChart />} />
