@@ -47,11 +47,7 @@ const TogglePeriod = ({ period, handleSearch }) => {
 
       case "thisYear":
         startDate = new Date(currentDate.getFullYear(), 0, 1).toISOString();
-        endDate = new Date(
-          currentDate.getFullYear(),
-          currentDate.getMonth(),
-          currentDate.getDate()
-        ).toISOString();
+        endDate = new Date(currentDate.getFullYear(), 11, 31).toISOString();
         break;
 
       case "lastYear":

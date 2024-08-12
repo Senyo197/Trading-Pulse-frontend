@@ -28,9 +28,7 @@ const ToggleSelect = () => {
         </select>
       </label>
 
-      {selectedPeriod !== "all" && (
-        <TogglePeriod period={selectedPeriod} handleSearch={handleSearch} />
-      )}
+      <TogglePeriod period={selectedPeriod} handleSearch={handleSearch} />
     </div>
   );
 };
