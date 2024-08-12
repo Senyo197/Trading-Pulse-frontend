@@ -14,7 +14,7 @@ const ToggleCustomDate = () => {
   };
 
   return (
-    <div className="flex items-center mb-2 md:mb-4 md:space-x-4 space-x-2 md:p-4 p-1 bg-white rounded-lg shadow-sm border border-gray-300">
+    <div className="flex items-center mb-4 space-x-4 p-4 bg-white rounded-lg shadow-sm border border-gray-300">
       <label className="flex flex-col text-sm text-gray-800">
         <span className="mb-1">Start Date:</span>
         <input
@@ -35,7 +35,7 @@ const ToggleCustomDate = () => {
       </label>
       <button
         onClick={handleSearchClick}
-        className="bg-blue-600 text-white text-xs md:px-4 md:py-2 px-3 py-1.5 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
+        className="bg-blue-600 text-white text-xs px-4 py-2 rounded-md shadow-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-400"
       >
         Search
       </button>
