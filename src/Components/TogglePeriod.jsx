@@ -60,7 +60,7 @@ const TogglePeriod = ({ period, handleSearch }) => {
         break;
 
       case "all":
-        startDate = "";
+        startDate = new Date(2007, 0, 1).toISOString();
         endDate = currentDate.toISOString();
         break;
 
