@@ -11,7 +11,7 @@ const ToggleSelect = () => {
   };
 
   return (
-    <div className="mb-4 p-4 bg-white rounded-lg shadow-lg border border-gray-300">
+    <div className="mb-2 md:mb-4 md:p-4 p-2 bg-white rounded-lg shadow-sm border border-gray-300">
       <label className="block text-lg font-serif text-gray-800">
         Select Period:
         <select

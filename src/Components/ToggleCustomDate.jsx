@@ -14,7 +14,7 @@ const ToggleCustomDate = () => {
   };
 
   return (
-    <div className="flex items-center mb-4 space-x-4 p-4 bg-white rounded-lg shadow-lg border border-gray-300">
+    <div className="flex items-center mb-2 md:mb-4 md:space-x-4 space-x-2 md:p-4 p-2 bg-white rounded-lg shadow-sm border border-gray-300">
       <label className="flex flex-col text-sm text-gray-800">
         <span className="mb-1 font-medium">Start Date:</span>
         <input
