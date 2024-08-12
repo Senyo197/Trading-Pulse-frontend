@@ -11,13 +11,13 @@ const ToggleSelect = () => {
   };
 
   return (
-    <div className="mb-4">
-      <label className="font-medium text-gray-700">
+    <div className="mb-4 p-4 bg-white rounded-lg shadow-lg border border-gray-300">
+      <label className="block text-lg font-serif text-gray-800">
         Select Period:
         <select
           value={selectedPeriod}
           onChange={handleSelectChange}
-          className="ml-2 border border-gray-300 rounded-md px-3 py-2"
+          className="ml-2 border border-gray-400 rounded-md px-4 py-2 text-gray-700 bg-gray-100 shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
         >
           <option value="all">All Time</option>
           <option value="lastWeek">Last Week</option>
