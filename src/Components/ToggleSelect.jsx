@@ -11,9 +11,12 @@ const ToggleSelect = () => {
   };
 
   return (
-    <div className="mb-4 p-4 bg-white rounded-lg shadow-sm border border-gray-300">
-      <label className="block text-normal font-serif text-gray-800">
-        Select Period:
+    <div className="md:mb-4 mb-2 md:p-4 p-2 bg-white rounded-lg shadow-sm border border-gray-300">
+      <div className="flex items-center space-x-2">
+        {" "}
+        <label className="block text-normal mx-4 font-serif text-gray-800">
+          Select Period:
+        </label>
         <select
           value={selectedPeriod}
           onChange={handleSelectChange}
@@ -26,8 +29,7 @@ const ToggleSelect = () => {
           <option value="thisYear">This Year</option>
           <option value="lastYear">Last Year</option>
         </select>
-      </label>
-
+      </div>
       <TogglePeriod period={selectedPeriod} handleSearch={handleSearch} />
     </div>
   );
